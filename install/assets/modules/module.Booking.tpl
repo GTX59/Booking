@@ -2,7 +2,7 @@
 /**
  * Booking
  * 
- * manage Lexicon
+ * set time to booking
  * 
  * @author      GTX59 (gtx59@yandex.ru)
  * @category    module
