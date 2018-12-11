@@ -2,7 +2,7 @@
 /**
  * Booking
  * 
- * 
+ * show time to booking
  *
  * @author	  GTX59 (gtx59@yandex.ru)
  * @category 	snippet
