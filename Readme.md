@@ -39,13 +39,13 @@ require(MODX_BASE_PATH.'assets/modules/booking/snippet.php');
 Пример как использовать формой для записи - биндим клик на интервал, вызываем какую-то форму, передаем данные о времени и дате записи:
 ```
 $(document).on('click','.booktimes span',function(){
-			if($(this).hasClass('disabled'))return;
-			var $form=$('.modalwindow');
-			var time=$(this).data('time')
-			var date=active.getDate()+'-'+(active.getMonth()+1)+'-'+active.getFullYear(); 
-			$form.show();
-			$(form).find('[name="date"]').val(date);
-      $(form).find('[name="time"]').val(time);
-		};
+	if($(this).hasClass('disabled'))return;
+	var $form=$('.modalwindow');//ваше окно с формой
+	var time=$(this).data('time')
+	var date=active.getDate()+'-'+(active.getMonth()+1)+'-'+active.getFullYear(); 
+	$form.show();
+	$(form).find('[name="date"]').val(date);
+	$(form).find('[name="time"]').val(time);
+	};
 });
 ```
