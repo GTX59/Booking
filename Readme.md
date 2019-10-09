@@ -44,8 +44,8 @@ $(document).on('click','.booktimes span',function(){
 	var time=$(this).data('time')
 	var date=active.getDate()+'-'+(active.getMonth()+1)+'-'+active.getFullYear(); 
 	$form.show();
-	$(form).find('[name="date"]').val(date);
-	$(form).find('[name="time"]').val(time);
+	$form.find('[name="date"]').val(date);
+	$form.find('[name="time"]').val(time);
 	};
 });
 ```
