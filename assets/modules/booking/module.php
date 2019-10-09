@@ -6,7 +6,7 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH'])&&strtolower($_SERVER['HTTP_X_REQUES
 	include_once ('../../../index.php');
 	if(isset($_POST['setup'])){
 		if(!isset($_SESSION['mgrValidated']))die('Go away!');
-		$modx->db->query('CREATE TABLE IF NOT EXISTS `'.$modx->db->config['table_prefix'].'_booking'.'` (`id` int(11) NOT NULL AUTO_INCREMENT, `date` text,`value` text, PRIMARY KEY (`id`)) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1');
+		$modx->db->query('CREATE TABLE IF NOT EXISTS `'.$modx->db->config['table_prefix'].'booking'.'` (`id` int(11) NOT NULL AUTO_INCREMENT, `date` text,`value` text, PRIMARY KEY (`id`)) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1');
 		$setup=file_get_contents('setup.json');
 		$o=$modx->db->update(array('properties'=>$setup),$modx->getFullTableName('site_modules'),'name="Booking"');
 		if($o)die('Успешно!');
