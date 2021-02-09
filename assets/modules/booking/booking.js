@@ -27,16 +27,20 @@ $(function(){
 				return {};
 			}
 		});
+		booktimes('.booktimes',active.getDay());
+		let $times=$('.booktimes1 span');
+		getbooking(active);
 		$('.calendar').on('pickmeup-change', function (e) {
 			active=e.detail.date;
 			getbooking(active);
+			booktimes('.booktimes',active.getDay());
+			$times=$('.booktimes1 span');
+			getbooking(active);
 		});
-		booktimes('.booktimes');
-		var $times=$('.booktimes1 span');
-		getbooking(active);
 		if(manager){
-			$times.on('click',function(){
-				var map='';
+			$(document).on('click','.booktimes1 span',function(){
+				let map='';
+				let day=active.getDay();
 				$(this).toggleClass('disabled');
 				for(var i=0;i<$times.length;i++){
 					if($times.eq(i).hasClass('disabled')){
@@ -47,14 +51,16 @@ $(function(){
 				}
 				$.ajax({
 					type:'post',
-					url:MODX_SITE_URL+'/assets/modules/booking/module.php', 
+					url:MODX_SITE_URL+'assets/modules/booking/module.php', 
 					data:{record:active.getTime(),value:map},
 					success:function(response){
 						for (var i=0;i<$times.length;i++){
 							if(response[i]==1){
 								$times.eq(i).addClass('disabled');
+								console.log('1 ');
 							}else{
 								$times.eq(i).removeClass('disabled');
+								console.log('0 !');
 							}
 						}
 					},
@@ -80,16 +86,17 @@ $(function(){
 			});
 		}
 		function getbooking(d){
-			var date=d?d.getTime():now.getTime();
+			let date=d?d.getTime():now.getTime();
 			console.log(date);
 			$times.addClass('disabled');
 			$.ajax({
 				type:'post',
-				url:MODX_SITE_URL+'/assets/modules/booking/module.php', 
+				url:MODX_SITE_URL+'assets/modules/booking/module.php', 
 				data:{date:date},
 				success:function(response){
 					for (var i=0;i<$times.length;i++){
-						if(response.length<$times.length || response[i]==0)$times.eq(i).removeClass('disabled');
+						$times.attr('data-date',active.getDate() + '-' + (active.getMonth() + 1) + '-' + active.getFullYear());
+						if(response.length<$times.length || response[i]==0)$times.eq(i).removeClass('disabled');console.log('null!');
 					}
 				},
 				error:function(){
@@ -100,10 +107,10 @@ $(function(){
 		function truncateDate(date) {
 			return new Date(date.getFullYear(), date.getMonth(), date.getDate());
 		}
-		function booktimes(el){
+		function booktimes(el,day){
 			var html='';
-			intervals.split(',').forEach(function(item, i, arr){
-				html+='<span class="disabled">'+item+'</span>';
+			intervals[day].split(',').forEach(function(item, i, arr){
+				html+='<span class="disabled" data-call="#bookform" data-time="'+item+'">'+item+'</span>';
 			});
 			$(el).html('<div class="booktimes1">'+html+'</div>');
 		}
