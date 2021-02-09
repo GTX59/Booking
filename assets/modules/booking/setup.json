@@ -11,7 +11,7 @@
   "weekends": [
     {
       "label": "Выходные",
-      "type": "string",a
+      "type": "string",
       "default": "6,0",
       "desc": "дни недели от 1 до 6, воскресенье 0, пример: 6,0",
       "value": "6,0"
