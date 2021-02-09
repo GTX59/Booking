@@ -24,6 +24,7 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH'])&&strtolower($_SERVER['HTTP_X_REQUES
 		$sql='CREATE TABLE IF NOT EXISTS `'.$tbl.'` (`id` int(11) NOT NULL AUTO_INCREMENT, `date` text,`value` text, PRIMARY KEY (`id`)) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1';
 		$modx->db->query($sql);
 		$date = (int)$_POST['record'];
+		$day = (int)$_POST['day'];
 		$arr=array('date'=>$date,'value'=>$_POST['value']);
 		$modx->db->insert($arr,$modx->getFullTableName('booking'));
 		$res = $modx->db->select('value',$modx->getFullTableName('booking'),'date="'.$date.'"');
@@ -44,7 +45,7 @@ if(!defined('IN_MANAGER_MODE') || IN_MANAGER_MODE !== true || ! $modx->hasPermis
 	<link rel="stylesheet" type="text/css" href="<?=MODX_SITE_URL?>/assets/modules/booking/pickmeup.css" />
 </head>
 <body>
-<script>if ( 3 == '4') {document.body.className='darkness';}</script>
+
 
 <h1>
     <i class="fa fa-file-text"></i>Бронирование
@@ -78,13 +79,20 @@ if(!defined('IN_MANAGER_MODE') || IN_MANAGER_MODE !== true || ! $modx->hasPermis
 <script type="text/javascript" src="media/script/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="<?=MODX_SITE_URL?>/assets/modules/booking/pickmeup.min.js"></script>
 <script>
-	var MODX_SITE_URL='<?=MODX_SITE_URL?>';
-	var holidays = '<?=$holidays?>';
-	var weekends = '<?=$weekends?>';
-	var plusdays = <?=$plusdays?>+0;
-	var intervals = '<?=$intervals?>';
-	var calendars = 3;
-	var manager=true;
+	let MODX_SITE_URL='<?=MODX_SITE_URL?>';
+	let holidays = '<?=$holidays?>';
+	let weekends = '<?=$weekends?>';
+	let plusdays = parseInt('<?=$plusdays?>');
+	let intervals = [];
+	intervals[1] = '<?=$intervals1?>';
+	intervals[2] = '<?=$intervals2?>';
+	intervals[3] = '<?=$intervals3?>';
+	intervals[4] = '<?=$intervals4?>';
+	intervals[5] = '<?=$intervals5?>';
+	intervals[6] = '<?=$intervals6?>';
+	intervals[0] = '<?=$intervals7?>';
+	let calendars = 3;
+	let manager=true;
 </script>
 <script type="text/javascript" src="<?=MODX_SITE_URL?>/assets/modules/booking/booking.js"></script>
 </body>
